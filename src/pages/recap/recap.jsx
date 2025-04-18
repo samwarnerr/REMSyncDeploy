@@ -46,7 +46,7 @@ const Recap = ({ userId }) => {
   }, [userId]);
 
   return (
-    <div className="dashboard-card modern">
+    <div className="dashboard-card modern wrapper">
       <h2 className="card-title">Weekly Sleep Duration</h2>
       {weekData.every(day => day.duration === 0) && (
         <p className="no-data">No sleep data available for the past week.</p>

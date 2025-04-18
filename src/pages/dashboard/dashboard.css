@@ -20,7 +20,7 @@
 }
 
 .dashboard-card.modern {
-  background: rgba(255, 255, 255, 0.025);
+  background: #06050C;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
@@ -236,6 +236,10 @@
     box-sizing: border-box;
   }
 
+  .score-row {
+    background-color: #18171d;
+  }
+
   .score-circle {
     margin-bottom: 1rem;
   }
@@ -243,4 +247,8 @@
   .dashboard-main.redesigned {
     padding: 5rem 0rem 1rem 0rem;
   }
+}
+
+.dashboard-card.modern.wrapper {
+  background-color: #0b0c13;
 }

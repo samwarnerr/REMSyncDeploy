@@ -100,7 +100,7 @@ const SleepStats = ({ goToTips, userId }) => {
   );
 
   return (
-    <div className="dashboard-card modern">
+    <div className="dashboard-card modern wrapper">
       <div className="score-row row-1">
         {sleepData[0] ? (
           renderStatsCard(sleepData[0], "Last Night's Stats")

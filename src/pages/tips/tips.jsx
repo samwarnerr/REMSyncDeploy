@@ -24,7 +24,7 @@ const tips = ({ userId }) => {
 
   if (sleepScore === null) {
     return (
-      <div className="dashboard-card modern ai-tips">
+      <div className="dashboard-card modern ai-tips wrapper">
         <p>Please log sleep data to receive AI-generated tips.</p>
       </div>
     );

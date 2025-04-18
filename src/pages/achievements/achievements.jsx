@@ -75,7 +75,7 @@ const Achievements = ({ userId }) => {
   ];
 
   return (
-    <div className="dashboard-card modern achievements">
+    <div className="dashboard-card modern achievements wrapper">
       <div className="rank-section single-rank">
         <h2 className="card-title">Your Rank</h2>
         <div className="rank-badge-icon highlight">

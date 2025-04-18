@@ -217,8 +217,11 @@
 }
 
 @media (max-width: 600px) {
+  .dashboard-wrapper {
+    padding: 4.5rem 1.5rem;
+  }
   .dashboard-card.modern {
-    padding: 1.5rem 1rem;
+    padding: 1rem 1rem;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
@@ -234,10 +237,6 @@
     text-align: center;
     width: 100%;
     box-sizing: border-box;
-  }
-
-  .score-row {
-    background-color: #18171d;
   }
 
   .score-circle {

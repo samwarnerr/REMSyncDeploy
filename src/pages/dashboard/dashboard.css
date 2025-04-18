@@ -1,0 +1,246 @@
+.dashboard-main.redesigned {
+  padding: 10rem;
+  padding-top: 9rem;
+  background-color: #06050C;
+  color: #e5e7eb;
+  min-height: 100vh;
+}
+
+.dashboard-header h1 {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  color: #FFF;
+  margin-bottom: 2rem;
+  font-weight: 200;
+}
+
+.dashboard-card.modern {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+
+.card-title{
+  font-size: 1.2rem;
+  color: #a1a1aa;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+}
+
+
+.dashboard-wrapper {
+  display: flex;
+  background-color: #06050C;
+  padding-top: 0;
+  position: relative;
+  min-height: 100dvh; 
+}
+
+
+.dashboard-sidebar-icons {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 20px; /* below navbar */
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+}
+
+
+
+.dashboard-sidebar-icons::before {
+  top: 0;
+}
+
+.dashboard-sidebar-icons::after {
+  bottom: 0;
+}
+
+
+.dashboard-sidebar-icons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.dashboard-sidebar-icons li {
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0.25rem;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard-sidebar-icons li:hover,
+.dashboard-sidebar-icons li.active {
+  background-color: #15141A;
+}
+
+.dashboard-sidebar-icons img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0.9);
+}
+
+.dashboard-main {
+  margin-left: 80px;
+  flex: 1;
+  padding: 2rem 3rem;
+  overflow-y: auto;
+}
+
+
+
+.bar-graph {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 15rem;
+  padding: 0 15rem;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.bar {
+  width: 75px;
+  background-color: #A5D7E8;
+  border-radius: 15px 15px 0 0;
+  transition: height 0.3s ease;
+}
+
+.bar-label {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+/* Hamburger button (toggle sidebar) */
+.sidebar-toggle {
+  position: fixed;
+  top: 1.7rem;
+  left: 1.5rem;
+  background: transparent;
+  border: none;
+  z-index: 999;
+  cursor: pointer;
+  display: none; /* hidden on desktop */
+}
+
+.sidebar-toggle img {
+  width: 28px;
+  height: 28px;
+}
+
+/* Sidebar default (desktop) */
+.dashboard-sidebar-icons {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  bottom: 0;
+  z-index: 9;
+  background-color: #06050C;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 1400px) {
+  .dashboard-main.redesigned {
+    padding: 5rem;
+    padding-top: 9rem;
+  }
+}
+
+/* Hide sidebar on mobile unless open */
+@media (max-width: 800px) {
+  .dashboard-sidebar-icons {
+    width: 110px;
+    transform: translateX(-100%);
+  }
+
+  .dashboard-sidebar-icons.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+
+  .dashboard-main.redesigned {
+    padding: 7rem 0rem 2rem 0rem;
+    margin-left: 0;
+  }
+
+  .dashboard-wrapper {
+    padding: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-card.modern {
+    padding: 1.5rem 1rem;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .score-row,
+  .score-block,
+  .score-left,
+  .score-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .score-circle {
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-main.redesigned {
+    padding: 5rem 0rem 1rem 0rem;
+  }
+}

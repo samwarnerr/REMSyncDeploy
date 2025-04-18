@@ -1,0 +1,222 @@
+/* === GRID LAYOUT FOR ROWS === */
+.score-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: stretch;
+}
+
+@media (max-width: 850px) {
+  .score-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* === BLOCK CARD STYLES === */
+.score-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  min-height: 300px;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* === SHARED CONTENT ALIGNMENT === */
+.score-left,
+.score-context, .score-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  justify-content: flex-start;
+  margin: auto;
+}
+
+/* === CIRCLE GRAPHIC === */
+.score-circle {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.score-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.ring-bg {
+  fill: none;
+  stroke: #2d2d35;
+  stroke-width: 6;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #A5D7E8;
+  stroke-width: 5;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* === CENTERED SCORE TEXT === */
+.score-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(1.6rem, 6vw, 2.5rem);
+  font-weight: 500;
+  color: #f1f5f9;
+  text-align: center;
+}
+
+/* === TEXT STYLING === */
+.score-info h3 {
+  font-size: 1.7rem;
+  color: #e5e7eb;
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+.score-info p {
+  font-size: 1.15rem;
+  color: #9ca3af;
+  margin: 0.15rem 0;
+  font-weight: 300;
+}
+
+.score-context h4 {
+  font-size: 1.6rem;
+  color: #f3f4f6;
+  margin-bottom: 0.25rem;
+}
+
+.score-context p {
+  font-size: 1.25rem;
+  color: #d1d5db;
+}
+
+/* === CTA BUTTON === */
+.tips-btn {
+  padding: 0.3rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: #bae6fd;
+  border: none;
+  color: #111;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 6em;
+}
+
+.tips-btn:hover {
+  background-color: #A5D7E8;
+}
+
+.arrow-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* === NO DATA PLACEHOLDER === */
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 1rem;
+  font-style: italic;
+  height: 100%;
+}
+
+/* === MOBILE OPTIMIZATION === */
+@media (max-width: 520px) {
+  .score-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .score-circle svg {
+    width: 120px;
+    height: 120px;
+  }
+
+  .score-number {
+    font-size: clamp(1.5rem, 5vw, 1.6rem);
+  }
+
+  .score-info h3,
+  .score-context h4 {
+    font-size: clamp(1.1rem, 5vw, 1.4rem);
+  }
+
+  .score-info p,
+  .score-context p {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+  }
+
+  .tips-btn {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .ring-bg,
+  .ring-progress {
+    stroke-width: 4;
+  }
+}
+
+
+/* === ALIGN CIRCLE LEFT OF STATS IN SCORE-LEFT === */
+.score-left {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: left;
+  margin: auto
+}
+
+/* Let the stats content align left */
+.score-info {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+/* Override center alignment from earlier for .score-info when inside score-left */
+.score-left .score-info h3,
+.score-left .score-info p {
+  text-align: left;
+}
+
+@media (max-width: 1208px) {
+  .score-left {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .score-info {
+    text-align: center;
+    margin-left: 0; /* 🔧 This is key */
+  }
+
+  .score-left .score-info h3,
+  .score-left .score-info p {
+    text-align: center;
+  }
+}

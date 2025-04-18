@@ -1,0 +1,251 @@
+.rank-section {
+  margin-top: 4rem;
+}
+
+
+.achievements h3 {
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+  }
+  
+  .points-progress {
+    margin-bottom: 2rem;
+  }
+  
+  .points-bar {
+    width: 100%;
+    height: 12px;
+    background-color: #1e293b;
+    border-radius: 9999px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  
+  .points-bar .fill {
+    height: 100%;
+    background-color: #A5D7E8;
+    border-radius: 9999px;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+  }
+  
+  .badge {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .badge:hover {
+    transform: scale(1.02);
+  }
+  
+  .badge-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .badge h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #A5D7E8;
+  }
+  
+  .badge p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+  }
+  
+  .badge.locked {
+    opacity: 0.4;
+  }
+  
+  .badge.locked .badge-icon {
+    filter: grayscale(100%);
+  }
+
+  .rank-badges-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .rank-badge-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .rank-badge-icon img {
+    width: 60px;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .rank-badge-icon span {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #ccc;
+  }
+  
+  .rank-badge-icon.dimmed img {
+    filter: grayscale(100%) brightness(0.6);
+    opacity: 0.6;
+  }
+  
+  .rank-badge-icon.highlight img {
+    filter: none;
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  
+  .rank-badge-icon.highlight span {
+    color: #fff;
+    font-weight: 500;
+  }
+  
+  
+  .next-rank-progress {
+    margin-top: 1.5rem;
+    color: #ccc;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  
+  .progress-bar-rank {
+    background: #1e293b;
+    border-radius: 999px;
+    overflow: hidden;
+    height: 10px;
+    margin: 0.5rem auto 2rem; /* center with auto margins */
+    width: 60%; /* ⬅️ You can adjust this */
+    max-width:500px; /* ⬅️ Prevents it from stretching too wide */
+  }
+  
+  .progress-bar-rank .fill {
+    background-color: #A5D7E8;
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  .rank-section.single-rank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .rank-section.single-rank .rank-badge-icon {
+    margin-top: 1rem;
+  }
+  
+
+
+  @media (max-width: 768px) {
+    .progress-bar-rank {
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-card.modern.achievements {
+      padding: 1.5rem 1rem;
+      overflow-x: hidden;
+    }
+  
+    .card-title {
+      font-size: clamp(1.25rem, 5vw, 1.5rem);
+      text-align: center;
+    }
+  
+    .rank-badge-icon img {
+      width: 50px;
+    }
+  
+    .rank-badge-icon span {
+      font-size: 0.75rem;
+    }
+  
+    .progress-bar-rank {
+      width: 90%;
+      max-width: 100%;
+    }
+  
+    .points-progress h3 {
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
+      text-align: center;
+    }
+  
+    .points-bar {
+      height: 10px;
+    }
+  
+    .points-progress p {
+      font-size: 0.9rem;
+      text-align: center;
+    }
+  
+    .badges-grid {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+  
+    .badge {
+      padding: 1rem;
+    }
+  
+    .badge-icon {
+      font-size: 2rem;
+    }
+  
+    .badge h4 {
+      font-size: clamp(1rem, 4vw, 1.2rem);
+    }
+  
+    .badge p {
+      font-size: clamp(0.8rem, 3.5vw, 0.95rem);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dashboard-card.modern.achievements {
+      padding: 1rem;
+      overflow-x: hidden;
+    }
+  
+    .rank-section.single-rank .rank-badge-icon img {
+      width: 50px;
+    }
+  
+    .badge {
+      padding: 1rem;
+    }
+  
+    .badge h4 {
+      font-size: clamp(1rem, 4vw, 1.1rem);
+    }
+  
+    .badge p {
+      font-size: clamp(0.8rem, 3.5vw, 0.95rem);
+    }
+  
+    .badges-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .points-progress p,
+    .next-rank-progress p {
+      font-size: 0.9rem;
+    }
+  }
+  

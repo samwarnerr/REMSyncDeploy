@@ -1,0 +1,43 @@
+.ai-tips .tips-intro {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #cbd5e1;
+  }
+  
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+.tip-item {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+.tip-item h4 {
+    font-size: 1.25rem;
+    color: #93c5fd;
+    margin-bottom: 0.5rem;
+  }
+  
+.tip-item p {
+    font-size: 1rem;
+    color: #e5e7eb;
+  }
+  
+.tip-item.special {
+    background-color: rgba(34, 211, 238, 0.08);
+    border-left: 4px solid #22d3ee;
+  }
+
+h4 {
+    font-size: 2rem;
+    color: #93c5fd;
+    margin-bottom: 0.5rem;
+  }

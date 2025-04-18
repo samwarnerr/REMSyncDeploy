@@ -11,7 +11,7 @@ const SleepStats = ({ goToTips, userId }) => {
   
     const fetchSleep = async () => {
       try {
-        const res = await fetch(`remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
+        const res = await fetch(`https://remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
         const data = await res.json();
         setSleepData(data);
   

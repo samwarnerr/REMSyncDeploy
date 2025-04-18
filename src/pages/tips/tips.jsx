@@ -9,7 +9,7 @@ const tips = ({ userId }) => {
 
     const fetchSleepData = async () => {
       try {
-        const res = await fetch(`remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
+        const res = await fetch(`https://remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
         const data = await res.json();
         if (data.length > 0) {
           setSleepScore(data[0].sleep_quality);

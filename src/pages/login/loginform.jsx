@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async e => {
         e.preventDefault();
         try {
-        const res = await fetch('remsyncdeploybackend-production.up.railway.app/api/auth/login', {
+        const res = await fetch('https://remsyncdeploybackend-production.up.railway.app/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)

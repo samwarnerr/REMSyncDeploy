@@ -50,7 +50,7 @@ const logsleep = () => {
     }
   
     try {
-      const res = await fetch('/api/sleep/entry', {
+      const res = await fetch('remsyncdeploybackend-production.up.railway.app/api/sleep/entry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -7,7 +7,7 @@ const Recap = ({ userId }) => {
   useEffect(() => {
     const fetchWeekData = async () => {
       try {
-        const res = await fetch(`/api/sleep/${userId}`);
+        const res = await fetch(`remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
         const data = await res.json();
 
         const now = new Date();

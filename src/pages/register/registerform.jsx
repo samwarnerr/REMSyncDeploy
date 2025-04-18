@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../login/loginform.css';
 
 const Register = ({ onRegister }) => {
@@ -73,6 +73,9 @@ const Register = ({ onRegister }) => {
             {loading ? 'Registering...' : 'Sign Up'}
           </button>
         </form>
+          <p className='signup-link'>
+                Already have an account? <Link to="/login" className='signup-btn'>Sign in</Link>
+            </p>
       </div>
     </div>
   );

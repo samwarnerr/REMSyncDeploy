@@ -48,8 +48,15 @@ const Register = ({ onRegister }) => {
     return (
       <div className='login-wrapper'>
         <div className='auth-card'>
-          <h2>Welcome, {formData.name}!</h2>
-          <p>Redirecting to your dashboard...</p>
+          <div className='success-container'>
+        <div className="moon-icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#A5D7E8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+          </div>
+            <h2>Welcome, {formData.name}!</h2>
+            <p>Redirecting to your dashboard...</p>
+            </div>
         </div>
       </div>
     );

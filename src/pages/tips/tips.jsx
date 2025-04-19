@@ -3,24 +3,48 @@ import './tips.css';
 
 const tips = ({ userId }) => {
   const [sleepScore, setSleepScore] = useState(null);
+  const [mlTips, setMlTips] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!userId) return;
-
-    const fetchSleepData = async () => {
+    const fetchSleepDataAndTips = async () => {
       try {
         const res = await fetch(`https://remsyncdeploybackend-production.up.railway.app/api/sleep/${userId}`);
         const data = await res.json();
+
         if (data.length > 0) {
-          setSleepScore(data[0].sleep_quality);
+          const latestEntry = data[0];
+          setSleepScore(latestEntry.sleep_quality);
+          const mlRes = await fetch('https://ample-intuition-production.up.railway.app/ml/tips', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              age: latestEntry.age ?? 20,
+              sleep_duration: latestEntry.sleep_duration ?? 7,
+              quality: (latestEntry.sleep_quality ?? 70) / 10,
+              activity: latestEntry.activity_level ?? 50
+            }),
+          });
+
+          const mlData = await mlRes.json();
+          setMlTips(mlData.tips || []);
         }
       } catch (err) {
-        console.error('Failed to fetch sleep score:', err);
+        console.error('Failed to fetch ML tips:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchSleepData();
+    fetchSleepDataAndTips();
   }, [userId]);
+
+  if (loading) {
+    return <div className="dashboard-card modern ai-tips wrapper">Loading tips...</div>;
+  }
 
   if (sleepScore === null) {
     return (
@@ -30,47 +54,17 @@ const tips = ({ userId }) => {
     );
   }
 
-  const generalTips = [
-    {
-      title: "Keep a Consistent Sleep Schedule",
-      detail: "Try to go to bed and wake up at the same time every day, even on weekends. This helps regulate your body's natural sleep rhythm."
-    },
-    {
-      title: "Limit Screen Time Before Bed",
-      detail: "Blue light from screens can disrupt melatonin production. Try to avoid screens for 1 hour before bed."
-    },
-    {
-      title: "Cool and Dark Room = Better Sleep",
-      detail: "Keep your room cool (60-67°F) and minimize light. Use blackout curtains or a sleep mask."
-    }
-  ];
-
-  const extraTip = sleepScore < 85
-    ? {
-        title: "Consider Relaxation Techniques",
-        detail: "If you have trouble falling asleep, try deep breathing, progressive muscle relaxation, or light stretching before bed."
-      }
-    : {
-        title: "Great Job!",
-        detail: "Your sleep score looks solid. Keep up the good habits — your body and mind thank you!"
-      };
-
   return (
     <div className="dashboard-card modern ai-tips">
-      <h4 className="tips-intro">
+      <h3 className="tips-intro">
         Based on your recent sleep score of <strong>{sleepScore}</strong>, here are some helpful suggestions:
-      </h4>
+      </h3>
       <ul className="tips-list">
-        {generalTips.map((tip, i) => (
+        {mlTips.map((tip, i) => (
           <li key={i} className="tip-item">
-            <h4>{tip.title}</h4>
-            <p>{tip.detail}</p>
+            <p>{tip}</p>
           </li>
         ))}
-        <li className="tip-item special">
-          <h4>{extraTip.title}</h4>
-          <p>{extraTip.detail}</p>
-        </li>
       </ul>
     </div>
   );

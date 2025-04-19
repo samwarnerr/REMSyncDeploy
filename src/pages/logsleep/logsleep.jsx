@@ -5,12 +5,13 @@ import './logsleep.css';
 const logsleep = () => {
   const today = new Date().toISOString().split('T')[0];
   const [sleepInput, setSleepInput] = useState({
-    date: today, 
+    date: today,
     bedtime: '',
     wakeTime: '',
     sleepQuality: '',
     notes: '',
-    syncToFHIR: false
+    syncToFHIR: false,
+    downloadFHIR: false
   });
 
   const handleInputChange = (e) => {
@@ -20,25 +21,24 @@ const logsleep = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!sleepInput.bedtime || !sleepInput.wakeTime || !sleepInput.date) {
       alert('Please fill in date, bedtime, and wake time');
       return;
     }
-  
+
     const user = JSON.parse(localStorage.getItem('user'));
     const userId = user?.id;
-  
+
     if (!userId) {
       alert('No user ID found. Please log in again.');
       return;
     }
-  
+
     const bedtimeFormatted = new Date(`${sleepInput.date}T${sleepInput.bedtime}:00`).toISOString();
-  
     const bedtimeHours = parseInt(sleepInput.bedtime.split(':')[0], 10);
     const wakeTimeHours = parseInt(sleepInput.wakeTime.split(':')[0], 10);
-  
+
     let wakeTimeFormatted;
     if (wakeTimeHours < bedtimeHours) {
       const selectedDate = new Date(sleepInput.date);
@@ -48,63 +48,76 @@ const logsleep = () => {
     } else {
       wakeTimeFormatted = `${sleepInput.date} ${sleepInput.wakeTime}:00`;
     }
-  
+
     try {
       const res = await fetch('https://remsyncdeploybackend-production.up.railway.app/api/sleep/entry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId, // ✅ now dynamically from logged-in user
+          userId,
           bedtime: bedtimeFormatted,
           wakeTime: wakeTimeFormatted,
           sleepQuality: sleepInput.sleepQuality,
           notes: sleepInput.notes
         })
       });
-  
+
       if (!res.ok) throw new Error(`Failed to submit: ${res.status} ${res.statusText}`);
-  
+
       alert('Sleep entry submitted successfully!');
-      setSleepInput({ date: today, bedtime: '', wakeTime: '', sleepQuality: '', notes: '', syncToFHIR: false});
     } catch (err) {
       alert('Error submitting sleep entry');
       console.error(err);
     }
 
+    // Construct FHIR Observation for both sync and download
+    const observation = {
+      resourceType: "Observation",
+      status: "final",
+      category: [{
+        coding: [{
+          system: "http://terminology.hl7.org/CodeSystem/observation-category",
+          code: "sleep",
+          display: "Sleep"
+        }]
+      }],
+      code: {
+        coding: [{
+          system: "http://loinc.org",
+          code: "93832-4",
+          display: "Sleep quality"
+        }]
+      },
+      subject: { reference: "Patient/example-user" },
+      effectiveDateTime: bedtimeFormatted,
+      valueQuantity: {
+        value: Number(sleepInput.sleepQuality),
+        unit: "Sleep Quality",
+        system: "http://unitsofmeasure.org",
+        code: "%"
+      },
+      note: [
+        {
+          text: sleepInput.notes || "No additional notes"
+        }
+      ]
+    };
+
+    if (sleepInput.downloadFHIR) {
+      const blob = new Blob([JSON.stringify(observation, null, 2)], {
+        type: "application/json"
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `FHIR-Sleep-Entry-${new Date().toISOString()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
 
     if (sleepInput.syncToFHIR) {
-      const observation = {
-        resourceType: "Observation",
-        status: "final",
-        category: [{
-          coding: [{
-            system: "http://terminology.hl7.org/CodeSystem/observation-category",
-            code: "sleep",
-            display: "Sleep"
-          }]
-        }],
-        code: {
-          coding: [{
-            system: "http://loinc.org",
-            code: "93832-4",
-            display: "Sleep quality"
-          }]
-        },
-        subject: { reference: "Patient/example-user" },
-        effectiveDateTime: bedtimeFormatted,
-        valueQuantity: {
-          value: Number(sleepInput.sleepQuality),
-          unit: "Sleep Quality",
-          system: "http://unitsofmeasure.org",
-          code: "%"
-        },
-        note: [
-          {
-            text: sleepInput.notes || "No additional notes"
-          }
-        ]
-      };
-      console.log("FHIR Observation Payload:", JSON.stringify(observation, null, 2));
       try {
         const resFHIR = await fetch("https://server.fire.ly/r4/Observation", {
           method: "POST",
@@ -113,22 +126,32 @@ const logsleep = () => {
           },
           body: JSON.stringify(observation)
         });
-    
+
         if (!resFHIR.ok) {
           throw new Error(`FHIR post failed: ${resFHIR.status}`);
         }
-    
+
         console.log("Synced to FHIR!");
       } catch (err) {
         console.warn("Optional FHIR sync failed:", err);
-        alert("Optional FHIR sync failed. Please check the console for details.");}
+        alert("Optional FHIR sync failed. Please check the console for details.");
+      }
     }
-    
+
+    // Reset form
+    setSleepInput({
+      date: today,
+      bedtime: '',
+      wakeTime: '',
+      sleepQuality: '',
+      notes: '',
+      syncToFHIR: false,
+      downloadFHIR: false
+    });
   };
-  
 
   return (
-    <div className='login-wrapper'>
+    <div className='sleep-wrapper'>
       <div className="log-sleep-container">
         <form className="sleep-input-form" onSubmit={handleSubmit}>
           <label>
@@ -183,7 +206,7 @@ const logsleep = () => {
             />
           </label>
           <label className='checkbox-label'>
-          <input
+            <input
               type="checkbox"
               name="syncToFHIR"
               className='sync-checkbox'
@@ -191,11 +214,26 @@ const logsleep = () => {
               onChange={(e) =>
                 setSleepInput((prev) => ({
                   ...prev,
-                  syncToFHIR: e.target.checked,
+                  syncToFHIR: e.target.checked
                 }))
               }
             />
             Sync this entry to FHIR server
+          </label>
+          <label className='checkbox-label'>
+            <input
+              type="checkbox"
+              name="downloadFHIR"
+              className='download-checkbox'
+              checked={sleepInput.downloadFHIR}
+              onChange={(e) =>
+                setSleepInput((prev) => ({
+                  ...prev,
+                  downloadFHIR: e.target.checked
+                }))
+              }
+            />
+            Download FHIR JSON
           </label>
           <button type="submit">Submit Sleep Data</button>
         </form>

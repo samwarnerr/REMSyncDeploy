@@ -21,8 +21,8 @@ const Login = ({ onLogin }) => {
         });
         const data = await res.json();
         if (res.ok) {
-            localStorage.setItem('user', JSON.stringify(data.user)); // store user data in local storage
-            onLogin(data.user); // pass user data to app state
+            localStorage.setItem('user', JSON.stringify(data.user)); // store user data local
+            onLogin(data.user); // pass data to state
             navigate('/dashboard');
         } else {
             alert(data.error || 'Login failed');

@@ -1,7 +1,5 @@
 import React from 'react'
 import logo from '../../assets/REMSync-logo.png'
-import hamburger from '../../assets/hamburger.png'
-import profile from '../../assets/icons/profile.svg'
 import logout from '../../assets/icons/logout.svg'
 import cloud from '../../assets/icons/cloudlogo.svg'
 import { Link, useLocation } from 'react-router-dom'
@@ -9,8 +7,6 @@ import { Link, useLocation } from 'react-router-dom'
 import './navbar.css'
 
 const navbar = ( { onLogout }) => {
-  const [menuOpen, setMenuOpen] = React.useState(false)
-
   const location = useLocation();
 
   const showLogout = location.pathname === '/dashboard';

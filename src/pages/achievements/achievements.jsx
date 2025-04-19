@@ -9,7 +9,7 @@ import legendary from '../../assets/icons/badges/legendary.svg';
 
 import './achievements.css';
 
-const Achievements = ({ userId }) => {
+const achievements = ({ userId }) => {
   const [userPoints, setUserPoints] = useState(0);
 
   useEffect(() => {
@@ -119,4 +119,4 @@ const Achievements = ({ userId }) => {
   );
 };
 
-export default Achievements;
+export default achievements;

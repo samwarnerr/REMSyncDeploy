@@ -31,8 +31,8 @@ const Register = ({ onRegister }) => {
 
       if (res.ok) {
         setSuccess(true);
-        onRegister(data.user); // Set app user state
-        setTimeout(() => navigate('/dashboard'), 1500); // Redirect after brief message
+        onRegister(data.user);
+        setTimeout(() => navigate('/dashboard'), 1500);
       } else {
         alert(data.error || 'Registration failed');
         setLoading(false);

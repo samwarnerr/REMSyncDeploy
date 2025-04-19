@@ -170,7 +170,7 @@ box-sizing: border-box;
   gap: 0.5rem;
   font-size: 1rem;
   color: #ccc;
-  flex-direction: row; /* <-- side-by-side layout */
+  flex-direction: row;
 }
 
 .sleep-wrapper {

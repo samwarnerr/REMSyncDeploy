@@ -62,7 +62,7 @@
   display: flex;
   justify-content: center;
   position: fixed;
-  top: 20px; /* below navbar */
+  top: 20px;
   left: 0;
   bottom: 0;
   z-index: 9;
@@ -153,7 +153,6 @@
   color: #ccc;
 }
 
-/* Hamburger button (toggle sidebar) */
 .sidebar-toggle {
   position: fixed;
   top: 1.7rem;
@@ -162,7 +161,7 @@
   border: none;
   z-index: 999;
   cursor: pointer;
-  display: none; /* hidden on desktop */
+  display: none;
 }
 
 .sidebar-toggle img {
@@ -170,7 +169,6 @@
   height: 28px;
 }
 
-/* Sidebar default (desktop) */
 .dashboard-sidebar-icons {
   width: 150px;
   display: flex;
@@ -191,7 +189,6 @@
   }
 }
 
-/* Hide sidebar on mobile unless open */
 @media (max-width: 800px) {
   .dashboard-sidebar-icons {
     width: 110px;

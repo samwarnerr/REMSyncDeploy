@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Navbar } from '../../components';
 import './logsleep.css';
 
 const logsleep = () => {
@@ -70,7 +69,7 @@ const logsleep = () => {
       console.error(err);
     }
 
-    // Construct FHIR Observation for both sync and download
+    // FHIR observation object
     const observation = {
       resourceType: "Observation",
       status: "final",
@@ -138,7 +137,7 @@ const logsleep = () => {
       }
     }
 
-    // Reset form
+    // reset
     setSleepInput({
       date: today,
       bedtime: '',

@@ -13,7 +13,7 @@ import './dashboard.css';
 const getWeekRange = () => {
   const now = new Date();
   const start = new Date(now);
-  start.setDate(now.getDate() - now.getDay()); // Sunday (or use +1 for Monday start)
+  start.setDate(now.getDate() - now.getDay());
   const end = new Date(start);
   end.setDate(start.getDate() + 6);
 

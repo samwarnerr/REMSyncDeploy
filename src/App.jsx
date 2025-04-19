@@ -27,14 +27,14 @@ const AppRoutes = ({ user, onLogin, onLogout }) => {
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true); // new loading state
+  const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem('user');
     if (saved) {
       setUser(JSON.parse(saved));
     }
-    setLoadingUser(false); // done loading regardless
+    setLoadingUser(false);
   }, []);
 
   const handleLogin = (userData) => {
@@ -47,7 +47,6 @@ const App = () => {
     localStorage.removeItem('user');
   };
 
-  //Show nothing while checking localStorage to avoid redirect flashes
   if (loadingUser) return null;
 
   return (

@@ -12,9 +12,8 @@ const Recap = ({ userId }) => {
 
         const now = new Date();
         const weekAgo = new Date();
-        weekAgo.setDate(now.getDate() - 6); // 7 days including today
+        weekAgo.setDate(now.getDate() - 6); // 7 days
 
-        // Create an object for each day of the past week
         const pastWeek = Array.from({ length: 7 }).map((_, i) => {
           const date = new Date(weekAgo);
           date.setDate(date.getDate() + i);

@@ -1,6 +1,6 @@
 ![Logo](logo.png)
 
-REMSync is a web-based sleep tracking app designed to help users improve their sleep hyginee through consistent logging, feedback, and gamifaction. The app integrates healthcare standards using FHIR, and also includes ML powered algorithms, analyzing sleep data.
+REMSync is a web-based sleep tracking app designed to help users improve their sleep hygiene through consistent logging, feedback, and gamifaction. The app integrates healthcare standards using FHIR, and also includes ML powered algorithms, analyzing sleep data.
 
 ## Features
 
